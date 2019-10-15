@@ -60,7 +60,6 @@ class DoublyLinkedList:
             self.head = new_node
 
     def remove_from_head(self):
-        def remove_from_head(self):
         value = self.head.value
         self.delete(self.head)
         return value
