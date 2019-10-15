@@ -24,3 +24,4 @@ class Stack:
 
     def len(self):
         return self.storage.length
+        # return self.size
