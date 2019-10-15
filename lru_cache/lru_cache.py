@@ -55,27 +55,20 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        '''
-        - add to linked list
-        - 
-        '''
-        current = self.get_node(key)
-
-        if current:
-            for i in self.storage:
-                if i == key:
-                    self.storage[i] = value
-            self.list.move_to_front(current)
+        key_value = self.get_node(key)
+        if key_value:
+            for x in self.storage:
+                if x == key:
+                    self.storage[x] = value
+            self.list.move_to_front(key_value)
         else:
             if self.size >= self.max:
-                tail = self.list.remove_from_tail()
-                self.storage.pop(tail)
-
-            result = self.list.add_to_head(key)
+                current_tail = self.list.remove_from_tail()
+                self.storage.pop(current_tail)
+            new_list = self.list.add_to_head(key)
             self.storage.update({key: value})
             self.size = self.list.length
-
-            return result
+            return new_list
 
     # def set(self, key, value):
     #     if key in self.storage:
