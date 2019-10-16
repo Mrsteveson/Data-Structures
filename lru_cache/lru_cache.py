@@ -13,6 +13,14 @@ class LRUCache:
         self.size = 0
         self.storage = {}
         self.list = DoublyLinkedList()
+    
+    # Solution from Wednesday Lecture
+    def __init__(self, limit=10):
+        self.limit = limit
+        self.size = 0
+        self.order = DoublyLinkedList
+        self.storage = {}
+        
 
     """
     Retrieves the value associated with the given key. Also
@@ -43,6 +51,15 @@ class LRUCache:
     #         return valid_key.value
     #     else:
     #         return None
+
+    # Solution from Wednesday's lecture
+    def get(self, key):
+        if key in self.storage:
+            node = self.storage[key]
+            self.order.move_to_end(node)
+            return node.value[1]
+        else:
+            return None
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -99,3 +116,19 @@ class LRUCache:
             current_head = None
         return current_head
 
+    # Solution from Wednesday's lecture
+    def set(self, key, value):
+        if key in self.storage:
+            node = self.storage[key]
+            node.value = (key, value)
+            self.order.move_to_end(node)
+            return
+        
+        if self.size == self.limit:
+            del self.storage[self.order.head.value[0]]
+            self.order.remove_from_head()
+            self.size -= 1
+
+        self.order.add_to_tail((key, value))
+        self.storage[key] = self.order.tail
+        self.size += 1
