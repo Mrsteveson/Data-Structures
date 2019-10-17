@@ -93,7 +93,6 @@ class BinarySearchTree:
             node = bft.dequeue()
             # Print the value we are taking out
             print(node.value)
-
             if node.left != None:
                 bft.enqueue(node.left)
             if node.right != None:
@@ -106,14 +105,13 @@ class BinarySearchTree:
         dft = Stack()
         dft.push(node)
         # While something exists, we traverse
-        while dft.size > 0:
+        while dft.len() > 0:
             node = dft.pop()
             # Print the value we are taking out
             print(node.value)
-
-            if node.left != None:
+            if node.left:
                 dft.push(node.left)
-            if node.right != None:
+            if node.right:
                 dft.push(node.right)
             
 
